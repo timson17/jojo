@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class createUser {
 
-    public String addUserToDatabase(String email, String password, String firstname, String lastname) {
+    public String addUserToDatabase(String email, String hashpswd, String firstname, String lastname) {
         String connect = "jdbc:postgresql://localhost:2020/postgres?user=postgres&password=mysecretpassword";
         try {
             Connection con = DriverManager.getConnection(connect);
@@ -12,7 +12,7 @@ public class createUser {
             ps.setString(1, firstname);
             ps.setString(2, lastname);
             ps.setString(3, email);
-            ps.setString(4, password);
+            ps.setString(4, hashpswd);
 
             ps.executeUpdate();
 

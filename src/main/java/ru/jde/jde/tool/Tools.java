@@ -2,6 +2,7 @@ package ru.jde.jde.tool;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
+import ru.jde.jde.hashgen.HashGenerator;
 import ru.jde.jde.jsonParser.getEmailParser;
 import ru.jde.jde.jsonParser.getFirstName;
 import ru.jde.jde.jsonParser.getLastName;
@@ -19,6 +20,7 @@ public class Tools {
         String firstname = new getFirstName().ParserFirstName(json); //
         String lastname = new getLastName().ParserLastName(json);
         createUser user = new createUser();
-        return user.addUserToDatabase(email, password, firstname, lastname);
+        String hashpswd = new HashGenerator().hashing(password);
+        return user.addUserToDatabase(email, hashpswd, firstname, lastname);
     }
 }
