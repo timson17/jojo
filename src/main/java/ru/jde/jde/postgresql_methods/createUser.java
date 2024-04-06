@@ -4,15 +4,13 @@ import java.sql.*;
 
 public class createUser {
 
-    public String addUserToDatabase(String email, String password) {
-        String first_name = null;
-        String last_name = null;
+    public String addUserToDatabase(String email, String password, String firstname, String lastname) {
         String connect = "jdbc:postgresql://localhost:2020/postgres?user=postgres&password=mysecretpassword";
         try {
             Connection con = DriverManager.getConnection(connect);
             PreparedStatement ps = con.prepareStatement("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
-            ps.setString(1, first_name);
-            ps.setString(2, last_name);
+            ps.setString(1, firstname);
+            ps.setString(2, lastname);
             ps.setString(3, email);
             ps.setString(4, password);
 
