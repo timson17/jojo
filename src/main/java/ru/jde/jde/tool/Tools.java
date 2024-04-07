@@ -1,15 +1,14 @@
 package ru.jde.jde.tool;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 import ru.jde.jde.hashgen.HashGenerator;
+import ru.jde.jde.hashgen.emailChecker;
 import ru.jde.jde.jsonParser.getEmailParser;
 import ru.jde.jde.jsonParser.getFirstName;
 import ru.jde.jde.jsonParser.getLastName;
 import ru.jde.jde.jsonParser.getPasswordParser;
 import ru.jde.jde.postgresql_methods.createUser;
 
-@SpringBootApplication
 @RestController
 public class Tools {
 
@@ -21,6 +20,11 @@ public class Tools {
         String lastname = new getLastName().ParserLastName(json);
         createUser user = new createUser();
         String hashpswd = new HashGenerator().hashing(password);
-        return user.addUserToDatabase(email, hashpswd, firstname, lastname);
+        boolean emlCheck = new emailChecker().checkEmail(email);
+        if (!emlCheck) {
+            return user.addUserToDatabase(email, hashpswd, firstname, lastname);
+        }
+        else return "Электронная почта уже используется";
+
     }
 }

@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class HashGenerator {
+
     public String hashing (String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");
