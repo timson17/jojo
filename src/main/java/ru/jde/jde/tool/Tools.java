@@ -1,6 +1,7 @@
 package ru.jde.jde.tool;
 
 import org.springframework.web.bind.annotation.*;
+import ru.jde.jde.authCheck.authChecker;
 import ru.jde.jde.hashgen.HashGenerator;
 import ru.jde.jde.hashgen.emailChecker;
 import ru.jde.jde.jsonParser.getEmailParser;
@@ -26,5 +27,14 @@ public class Tools {
         }
         else return "Электронная почта уже используется";
 
+    }
+
+    @PostMapping("/auth") //Мапинг авторизации
+    public String authUser(@RequestBody String json) {
+        String email = new getEmailParser().ParserEmail(json);
+        String password = new getPasswordParser().ParserPassword(json);
+        String hashPswd = new HashGenerator().hashing(password);
+        boolean res = new authChecker().checkAuth(email,hashPswd);
+        return res + " " +"попытка авторизации";
     }
 }

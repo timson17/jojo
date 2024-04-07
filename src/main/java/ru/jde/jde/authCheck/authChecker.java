@@ -1,18 +1,15 @@
-package ru.jde.jde.hashgen;
+package ru.jde.jde.authCheck;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class emailChecker {
-    public boolean checkEmail(String email) {
+public class authChecker {
+    public boolean checkAuth(String email, String hashPswd) {
         String connect = "jdbc:postgresql://localhost:2020/postgres?user=postgres&password=mysecretpassword";
         try {
             Connection con = DriverManager.getConnection(connect);
-            PreparedStatement ps = con.prepareStatement("SELECT email from users where email = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT email, password from users where email = ? and password = ?");
             ps.setString(1, email);
+            ps.setString(2, hashPswd);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
