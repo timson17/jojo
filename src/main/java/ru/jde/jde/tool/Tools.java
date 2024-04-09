@@ -1,6 +1,7 @@
 package ru.jde.jde.tool;
 
 import org.springframework.web.bind.annotation.*;
+import ru.jde.jde.jsonParser.AddNigger.*;
 import ru.jde.jde.postgresql_methods.authChecker;
 import ru.jde.jde.hashgen.HashGenerator;
 import ru.jde.jde.postgresql_methods.emailChecker;
@@ -45,7 +46,13 @@ public class Tools {
 
     @PostMapping("/addNigger")
     public String addNigger(@RequestBody String json) {
-        return "";
+        String niggerName = new addNiggerName().parseNiggerName(json);
+        String niggerPower = new addNiggerPower().parseNiggerPower(json);
+        String niggerEvasion = new addNiggerEvasion().parseNiggerEvasion(json);
+        String niggerHealth = new addNiggerHealth().parseNiggerHealth(json);
+        String niggerOwnerId = new addNiggerOwnerId().parseNiggerOwnerId(json);
+
+        return "СОЗДАН ЗВЕРЮГА" + " " + niggerName;
     }
 
 }
