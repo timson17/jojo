@@ -1,4 +1,4 @@
-package ru.jde.jde.hashgen;
+package ru.jde.jde.postgresql_methods;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class emailChecker {
     public boolean checkEmail(String email) {
-        String connect = "jdbc:postgresql://localhost:2020/postgres?user=postgres&password=mysecretpassword";
+        String connect = "jdbc:postgresql://localhost:2020/postgres?user=postgres&password=12345678";
         try {
             Connection con = DriverManager.getConnection(connect);
             PreparedStatement ps = con.prepareStatement("SELECT email from users where email = ?");

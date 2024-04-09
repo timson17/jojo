@@ -1,4 +1,4 @@
-package ru.jde.jde.jsonParser;
+package ru.jde.jde.jsonParser.LoginRegistration;
 
 import org.json.JSONObject;
 

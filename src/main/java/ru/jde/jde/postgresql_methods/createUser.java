@@ -5,7 +5,7 @@ import java.sql.*;
 public class createUser {
 
     public String addUserToDatabase(String email, String hashpswd, String firstname, String lastname) {
-        String connect = "jdbc:postgresql://localhost:2020/postgres?user=postgres&password=mysecretpassword";
+        String connect = "jdbc:postgresql://localhost:2020/postgres?user=postgres&password=12345678";
         try {
             Connection con = DriverManager.getConnection(connect);
             PreparedStatement ps = con.prepareStatement("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
