@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class authChecker {
     public boolean checkAuth(String email, String hashPswd) {
-        String connect = "jdbc:postgresql://localhost:2020/postgres?user=postgres&password=12345678";
+        String connect = "jdbc:postgresql://192.168.0.129:2020/postgres?user=postgres&password=12345678";
         try {
             Connection con = DriverManager.getConnection(connect);
             PreparedStatement ps = con.prepareStatement("SELECT email, password from users where email = ? and password = ?");

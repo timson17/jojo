@@ -10,6 +10,7 @@ import ru.jde.jde.jsonParser.LoginRegistration.getFirstName;
 import ru.jde.jde.jsonParser.LoginRegistration.getLastName;
 import ru.jde.jde.jsonParser.LoginRegistration.getPasswordParser;
 import ru.jde.jde.postgresql_methods.createUser;
+import ru.jde.jde.postgresql_methods.putNiggerToTable;
 
 @RestController
 public class Tools {
@@ -40,19 +41,19 @@ public class Tools {
     }
 
     @GetMapping("/main_page")
-    public String mainPage(@RequestParam("first_name") String paramValue) {
-        return "Hello" + paramValue;
+    public String mainPage(@RequestParam("id") String paramValue) {
+        return "Hello " + paramValue + " pista";
     }
 
     @PostMapping("/addNigger")
     public String addNigger(@RequestBody String json) {
         String niggerName = new addNiggerName().parseNiggerName(json);
-        String niggerPower = new addNiggerPower().parseNiggerPower(json);
-        String niggerEvasion = new addNiggerEvasion().parseNiggerEvasion(json);
-        String niggerHealth = new addNiggerHealth().parseNiggerHealth(json);
-        String niggerOwnerId = new addNiggerOwnerId().parseNiggerOwnerId(json);
-
-        return "СОЗДАН ЗВЕРЮГА" + " " + niggerName;
+        Integer niggerPower = new addNiggerPower().parseNiggerPower(json);
+        Integer niggerEvasion = new addNiggerEvasion().parseNiggerEvasion(json);
+        Integer niggerHealth = new addNiggerHealth().parseNiggerHealth(json);
+        Integer niggerOwnerId = new addNiggerOwnerId().parseNiggerOwnerId(json);
+        putNiggerToTable nigger= new putNiggerToTable();
+        return nigger.addNiggerToTable(niggerOwnerId,niggerName,niggerPower,niggerEvasion,niggerHealth);
     }
 
 }

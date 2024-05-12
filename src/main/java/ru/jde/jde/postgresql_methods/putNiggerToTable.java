@@ -8,15 +8,15 @@ import java.sql.SQLException;
 public class putNiggerToTable {
 
     public String addNiggerToTable(int owner_id, String name, int power, int evasion, int health) {
-        String connect = "jdbc:postgresql://localhost:2020/postgres?user=postgres&password=12345678";
+        String connect = "jdbc:postgresql://192.168.0.129:2020/postgres?user=postgres&password=12345678";
         try {
             Connection con = DriverManager.getConnection(connect);
-            PreparedStatement ps = con.prepareStatement("INSERT INTO units (owner_id, name, power, evasion, health) VALUES (?, ?, ?, ?, ?)");
-            ps.setString(1, String.valueOf(owner_id));
-            ps.setString(2, name);
-            ps.setString(3, String.valueOf(power));
-            ps.setString(4, String.valueOf(evasion));
-            ps.setString(5, String.valueOf(health));
+            PreparedStatement ps = con.prepareStatement("INSERT INTO units (name, power, evasion, health, owner_id ) VALUES (?, ?, ?, ?, ?)");
+            ps.setString(1, name);
+            ps.setInt(2, power);
+            ps.setInt(3, evasion);
+            ps.setInt(4, health);
+            ps.setInt(5, owner_id);
 
             ps.executeUpdate();
 
@@ -27,6 +27,9 @@ public class putNiggerToTable {
             e.printStackTrace(); // или другие действия по обработке исключения
         }
 
-        return "Пользователь создан";
-}
+        //return "Пользователь создан";
+        return "Для пользователя: " + owner_id + " зверь с именем: " + name;
+    }
+
+
 }
